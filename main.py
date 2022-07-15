@@ -14,6 +14,13 @@ def get_opp(file_name):
 
     ua = UserAgent()
 
+    http_proxy = "http://195.135.242.141:8081"
+
+    proxies = {
+        'http': http_proxy,
+        # 'https': https_proxy,
+    }
+
     headers = {
         'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;'
                   'q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -27,7 +34,7 @@ def get_opp(file_name):
 
         try:
             response = requests.post("https://www.kody.su/check-tel", headers=headers,
-                                     data=data)
+                                     data=data, proxies=proxies)
             html = response.text
 
             soup = BeautifulSoup(html, "lxml")
